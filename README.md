@@ -2,7 +2,7 @@ A bunch of "hello world" tier SwiftUI and Metal shader effects.
 
 ## Preview
 
-<video src="https://github.com/user-attachments/assets/cb401e0c-29ba-41df-926d-8d02283726c3" width="250"></video>
+<video src="https://github.com/user-attachments/assets/0d95cde7-48a0-4688-9fcd-c59bcf082225" width="250"></video>
 
 ## Credit
 

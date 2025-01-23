@@ -4,7 +4,7 @@ import SwiftUI
 struct SwiftUIMetalEffectsApp: App {
     var body: some Scene {
         WindowGroup {
-            DistortionEffectView()
+            SinebowEffectView()
         }
     }
 }

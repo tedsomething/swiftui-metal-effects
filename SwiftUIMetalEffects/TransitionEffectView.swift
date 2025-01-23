@@ -10,7 +10,6 @@ extension AnyTransition {
 
 struct CirclesTransition: ViewModifier {
     var amount = 0.0
-    var insertion = true
     
     func body(content: Content) -> some View {
         content
@@ -26,6 +25,32 @@ struct CirclesTransition: ViewModifier {
     }
 }
 
+extension AnyTransition {
+    static let crosswarp: AnyTransition =
+        .modifier(
+            active: CrosswarpTransition(amount: 1),
+            identity: CrosswarpTransition(amount: 0)
+        )
+}
+
+struct CrosswarpTransition: ViewModifier {
+    var amount = 0.0
+    
+    func body(content: Content) -> some View {
+        content
+            .visualEffect { content, proxy in
+                content
+                    .layerEffect(
+                        ShaderLibrary.crosswarp(
+                            .float2(proxy.size),
+                            .float(amount)
+                        ),
+                        maxSampleOffset: .zero
+                    )
+            }
+    }
+}
+
 struct TransitionView: View {
     @State var on: Bool = true
     
@@ -36,19 +61,18 @@ struct TransitionView: View {
                     Image("1")
                         .resizable()
                         .scaledToFit()
-                        .transition(.circles)
+                        .transition(.crosswarp)
                 } else {
                     Image("2")
                         .resizable()
                         .scaledToFit()
-                        .transition(.circles)
+                        .transition(.crosswarp)
                 }
             }
             
             Button(action: {
                 withAnimation(.linear(duration: 2.0), {
                     on.toggle()
-
                 })
             }, label: {
                 Text("Toggle")
